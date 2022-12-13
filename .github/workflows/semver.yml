@@ -1,0 +1,80 @@
+name: semver
+on:
+  workflow_dispatch:
+    
+ 
+ 
+jobs:
+  without_prep:
+    name: subs
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3                 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: 'Get semver major'
+        id: semver1
+        uses: "snsinahub-org/semver@dev"
+        with:
+          type: major
+          prefix: ''
+      - name: 'Get semver minor'
+        id: semver2
+        uses: "snsinahub-org/semver@dev"
+        with:
+          type: minor
+          prefix:  ''
+      - name: 'Get semver patch'
+        id: semver3
+        uses: "snsinahub-org/semver@dev"
+        with:
+          type: patch
+          prefix:  ''
+      - name: 'print major'        
+        run: |
+         echo ${{ steps.semver1.outputs.version }}
+      - name: 'print minor'        
+        run: |
+         echo ${{ steps.semver2.outputs.version }}
+      - name: 'print patch'        
+        run: |
+         echo ${{ steps.semver3.outputs.version }}
+  with_prep:
+    name: sub
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3                 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: 'Get semver major'
+        id: semver1
+        uses: "snsinahub-org/semver@dev"
+        with:
+          type: major
+          prefix: 'dubbo-'
+      - name: 'Get semver minor'
+        id: semver2
+        uses: "snsinahub-org/semver@dev"
+        with:
+          type: minor
+          prefix:  'dubbo-'
+      - name: 'Get semver patch'
+        id: semver3
+        uses: "snsinahub-org/semver@dev"
+        with:
+          type: patch
+          prefix:  'dubbo-'
+      - name: 'print major'        
+        run: |
+         echo ${{ steps.semver1.outputs.version }}
+      - name: 'print minor'        
+        run: |
+         echo ${{ steps.semver2.outputs.version }}
+      - name: 'print patch'        
+        run: |
+         echo ${{ steps.semver3.outputs.version }}
+          
